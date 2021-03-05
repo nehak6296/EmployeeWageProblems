@@ -9,16 +9,17 @@ namespace EmployeeAttendance
         public const int EMP_RATE_PER_HOUR = 20;
         public const int MAX_WORKING_DAYS = 20;
         public const int MAX_WORKING_HOURS = 100;
-        static void Main(string[] args)
+
+        public static int ComputeEmpWage()
         {
+            //Variables
             int empHrs = 0;
-            int empWage = 0;
             int salary = 0;
             int numOfWorkinDays = 0;
             int numOfWorkingHours = 0;
             Random random = new Random();
 
-            while (numOfWorkingHours <= MAX_WORKING_HOURS & numOfWorkinDays <= MAX_WORKING_DAYS)
+            while (numOfWorkingHours <= MAX_WORKING_HOURS & numOfWorkinDays < MAX_WORKING_DAYS)
             {
                 numOfWorkinDays++;
                 int empCheck = random.Next(0, 3);
@@ -34,10 +35,16 @@ namespace EmployeeAttendance
                         empHrs = 0;
                         break;
                 }
-                empWage = empHrs * EMP_RATE_PER_HOUR;
-                salary = salary + empWage;
+                numOfWorkingHours += empHrs;
+                Console.WriteLine("Day: " + numOfWorkinDays + "Employee Hours : " + empHrs );
             }
-            Console.WriteLine("Salary for Month :" + salary);
+            salary = numOfWorkingHours * EMP_RATE_PER_HOUR;
+            Console.WriteLine("Salary of Month : " + salary);
+            return salary;
+        }
+        static void Main(string[] args)
+        {
+            ComputeEmpWage();
         }
     }
 }
